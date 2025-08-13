@@ -4,9 +4,9 @@ on:
     branches: 
 
 env:
-  FILENAME_PREFIX: RTK_Surveyor_Firmware
-  FIRMWARE_VERSION_MAJOR: 4
-  FIRMWARE_VERSION_MINOR: 2
+  FILENAME_PREFIX: RTK_Facet_Firmware
+  FIRMWARE_VERSION_MAJOR: 1
+  FIRMWARE_VERSION_MINOR: 0
   POINTPERFECT_TOKEN: ${{ secrets.POINTPERFECT_TOKEN }}
 
 jobs:
@@ -38,7 +38,7 @@ jobs:
               echo "FILE_ENDING_UNDERSCORE=_v${{ env.FIRMWARE_VERSION_MAJOR }}_${{ env.FIRMWARE_VERSION_MINOR }}" >> "$GITHUB_ENV"
               echo "FILE_ENDING_NOUNDERSCORE=_v${{ env.FIRMWARE_VERSION_MAJOR }}.${{ env.FIRMWARE_VERSION_MINOR }}" >> "$GITHUB_ENV"
               echo "JSON_ENDING=" >> "$GITHUB_ENV"
-              echo "JSON_FILE_NAME=RTK-Firmware.json" >> "$GITHUB_ENV"
+              echo "JSON_FILE_NAME=RTK-Facet-Firmware.json" >> "$GITHUB_ENV"
               echo "ENABLE_DEVELOPER=false" >> "$GITHUB_ENV"
               echo "DEBUG_LEVEL=none" >> "$GITHUB_ENV"
           else
@@ -159,10 +159,10 @@ jobs:
           API_TOKEN_GITHUB: ${{ secrets.API_GITHUB_RTK_FILE_TOKEN }}
         with:
           source_file: ./Firmware/RTK_Surveyor/build/esp32.esp32.esp32/${{ env.FILENAME_PREFIX }}${{ env.FILE_ENDING_UNDERSCORE }}.bin
-          destination_repo: 'sparkfun/SparkFun_RTK_Firmware_Binaries'
-          destination_folder: ''
-          user_email: 'nathan@sparkfun.com'
-          user_name: 'nseidle'
+          destination_repo: 'MatthiasKroll/SparkFun_RTK_Firmware'
+          destination_folder: 'Binary'
+          user_email: 'kroll.matthias@gmx.de'
+          user_name: 'MatthiasKroll'
           commit_message: 'Github Action - Updating Binary ${{ steps.dateNoScores.outputs.dateNoScores }}'
 
       - name: Update JSON File
@@ -180,8 +180,8 @@ jobs:
           API_TOKEN_GITHUB: ${{ secrets.API_GITHUB_RTK_FILE_TOKEN }}
         with:
           source_file: ${{ env.JSON_FILE_NAME }}
-          destination_repo: 'sparkfun/SparkFun_RTK_Firmware_Binaries'
-          destination_folder: ''
-          user_email: 'nathan@sparkfun.com'
-          user_name: 'nseidle'
+          destination_repo: 'MatthiasKroll/SparkFun_RTK_Firmware'
+          destination_folder: 'Binary'
+          user_email: 'kroll.matthias@gmx.de'
+          user_name: 'MatthiasKroll'
           commit_message: 'Github Action - Updating JSON ${{ steps.dateNoScores.outputs.dateNoScores }}'
